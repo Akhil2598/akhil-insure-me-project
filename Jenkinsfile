@@ -30,7 +30,7 @@ node{
     
 }
     }
-    stage('deploy')
+    stage('ansible-deploy')
     {
     
        ansiblePlaybook become: true, credentialsId: 'akhilcred', disableHostKeyChecking: true, installation: 'myansible', inventory: '/etc/ansible/hosts', playbook: 'ansible-playbook.yml' 
