@@ -25,8 +25,8 @@ node{
     {
     
     withCredentials([string(credentialsId: 'dockercred', variable: 'dockercred')]) {
-        sh 'docker login -u akhil2598 -p ${dockercred}'
-        sh 'docker push akhil2598/insurance-project-image:1.0'
+        sh 'sudo docker login -u akhil2598 -p ${dockercred}'
+        sh 'sudo docker push akhil2598/insurance-project-image:1.0'
     
 }
     }
