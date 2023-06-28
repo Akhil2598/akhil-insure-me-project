@@ -1,30 +1,38 @@
 node{
-    stage('git checjout')
+    stage('git checkout')
     {
-        git branch: 'master', url: 'https://github.com/kondetimounika80/insure-me.git'
+        git branch: 'master', url: 'https://github.com/Akhil2598/akhil-insure-me-project.git'
     }
 
-    stage('build'){
+    stage('compile'){
     
+    sh 'mvn clean compile'
+    }
+    stage('test'){
+        
+    sh 'mvn clean test'
+    }
+    stage('package'){
+        
     sh 'mvn clean package'
     }
-    stage('dockerimagebuild')
+    stage('build a docker image')
     {
-    sh 'sudo docker build -t kondetimounika/insureme:1.0 .'
+    sh 'sudo docker build -t akhil2598/insurance-project-image:1.0 .'
    
     }
-    stage('docker image push to registry')
+    stage('push docker image to akhilrepo')
     {
     
-    withCredentials([string(credentialsId: 'docker-password', variable: 'docker')]) {
-        sh 'docker login -u kondetimounika -p ${docker}'
-        sh 'docker push kondetimounika/insureme:1.0'
+    withCredentials([string(credentialsId: 'akhildockercred', variable: 'docker')]) {
+        sh 'docker login -u akhil2598 -p ${docker}'
+        sh 'docker push akhil2598/insurance-project-image:1.0'
     
 }
     }
     stage('deploy')
     {
     
-       ansiblePlaybook become: true, credentialsId: 'ansiblekey', disableHostKeyChecking: true, installation: 'myAnsible', inventory: '/etc/ansible/hosts', playbook: 'ansible-playbook.yml' 
+       ansiblePlaybook become: true, credentialsId: 'akhilcred', disableHostKeyChecking: true, installation: 'myansible', inventory: '/etc/ansible/hosts', playbook: 'ansible-playbook.yml' 
     }
 }
