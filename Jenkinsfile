@@ -32,7 +32,7 @@ node{
     }
     stage('ansible-deploy')
     {
-    
-       ansiblePlaybook become: true, credentialsId: 'ansiblecred', disableHostKeyChecking: true, installation: 'myansible', inventory: '/etc/ansible/hosts', playbook: 'ansible-playbook.yml' 
+       sh 'sudo chmod 777 ansible.pem'
+       ansiblePlaybook become: true, credentialsId: 'akhilcred', disableHostKeyChecking: true, installation: 'myansible', inventory: '/etc/ansible/hosts', playbook: 'ansible-playbook.yml' 
     }
 }
