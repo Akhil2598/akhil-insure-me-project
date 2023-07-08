@@ -24,8 +24,8 @@ node{
     stage('push docker image to akhilrepo')
     {
     
-    withCredentials([string(credentialsId: 'docker', variable: 'docker')]) {
-        sh 'sudo docker login -u akhil2598 -p ${docker}'
+    withCredentials([string(credentialsId: 'docker', variable: 'admin')]) {
+        sh 'sudo docker login -u akhil2598 -p ${admin}'
         sh 'sudo docker push akhil2598/insurance-project-image:1.0'
     
 }
