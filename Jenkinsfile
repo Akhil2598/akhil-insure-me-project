@@ -18,7 +18,7 @@ node{
     }
     stage('build a docker image')
     {
-    sh 'sudo docker build -t akhil2598/insurance-project-image:1.0 .'
+    sh ' sudo docker build -t akhil2598/insurance-project-image:1.0 .'
    
     }
     stage('push docker image to akhilrepo')
